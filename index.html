@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reprodução da listagem de vídeos do YouTube desenvolvida com HTML5 e CSS Grid Layout para o Desafio de Projeto da DIO.">
+  <meta name="author" content="MatheusMittz">
+  <title>YouTube - Listagem de Vídeos com CSS Grid | DIO</title>
+  <link rel="icon" href="assets/img/icon-youtube.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       Header / Barra Superior de Navegação
+       ========================================== -->
+  <header class="header">
+    <div class="header-left">
+      <button class="icon-btn" aria-label="Abrir Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <a href="#" class="logo-container" aria-label="Página Inicial do YouTube">
+        <img src="assets/img/logo-youtube.png" alt="Logo YouTube">
+      </a>
+    </div>
+
+    <div class="header-center">
+      <form class="search-box" action="#" method="get" onsubmit="event.preventDefault();">
+        <input type="text" placeholder="Pesquisar" aria-label="Pesquisar vídeos">
+        <button type="submit" class="search-submit-btn" aria-label="Pesquisar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </form>
+      <button class="icon-btn mic-btn" aria-label="Pesquisar com sua voz">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="23"></line>
+          <line x1="8" y1="23" x2="16" y2="23"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="header-right">
+      <button class="icon-btn" aria-label="Criar conteúdo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="23 7 16 12 23 17 23 7"></polygon>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="10" x2="8" y2="14"></line>
+          <line x1="6" y1="12" x2="10" y2="12"></line>
+        </svg>
+      </button>
+
+      <button class="icon-btn" aria-label="Notificações">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </button>
+
+      <div class="user-profile" title="Conta de Matheus Mittz">
+        <img src="assets/img/photo-user.jpg" alt="Foto de perfil de Matheus Mittz" onerror="this.src='assets/img/icon-youtube.png'">
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       Container da Aplicação (Sidebar + Conteúdo Grid)
+       ========================================== -->
+  <div class="app-container">
+
+    <!-- Barra Lateral de Navegação (Sidebar) -->
+    <aside class="sidebar" aria-label="Menu principal">
+      <nav class="nav-section">
+        <a href="#" class="nav-item active">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+          <span>Início</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+          </svg>
+          <span>Explorar</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+          </svg>
+          <span>Inscrições</span>
+        </a>
+      </nav>
+
+      <div class="nav-divider"></div>
+
+      <nav class="nav-section">
+        <a href="#" class="nav-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>Biblioteca</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 14 14"></polyline>
+          </svg>
+          <span>Histórico</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Assistir mais tarde</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+          </svg>
+          <span>Vídeos marcados com gostei</span>
+        </a>
+      </nav>
+
+      <div class="nav-divider"></div>
+
+      <div class="section-title">Inscrições</div>
+      <nav class="nav-section">
+        <a href="#" class="channel-item">
+          <img src="assets/img/dio.png" alt="Canal DIO">
+          <span>DIO</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Conteúdo Central: Chips e Grade de Vídeos -->
+    <main class="main-content">
+      
+      <!-- Barra de Filtros / Chips -->
+      <section class="categories-bar" aria-label="Filtros de categoria">
+        <button class="category-chip active">Tudo</button>
+        <button class="category-chip">Programação</button>
+        <button class="category-chip">Ciência de Dados</button>
+        <button class="category-chip">Podcasts</button>
+        <button class="category-chip">Inteligência Artificial</button>
+        <button class="category-chip">Ao vivo</button>
+        <button class="category-chip">CSS Grid</button>
+        <button class="category-chip">JavaScript</button>
+        <button class="category-chip">Novidades para você</button>
+      </section>
+
+      <!-- GRADE DE VÍDEOS EM CSS GRID -->
+      <section class="video-grid" aria-label="Grade de vídeos recomendados">
+        
+        <!-- Vídeo 1 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-01.png" alt="Geração Tech Unimed - BH - Ciência de Dados">
+            <span class="duration-tag">1:28:45</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Geração Tech Unimed - BH - Ciência de Dados</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">2,1 mil visualizações • Transmitido há 2 dias</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 2 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-02.png" alt="Scrum Talks: Métodos Ágeis na Prática">
+            <span class="duration-tag">45:12</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Scrum Talks: Métodos Ágeis e Entregas Contínuas na Prática</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">1,6 mil visualizações • Transmitido há 3 dias</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 3 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-03.png" alt="Machine Learning Avançado - Fast Track">
+            <span class="duration-tag">2:04:18</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Machine Learning Avançado - Fast Track | Trilha de Inteligência Artificial</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">1,7 mil visualizações • Transmitido há 4 dias</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 4 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-04.png" alt="Global Skills #2 - Project Planning">
+            <span class="duration-tag">58:30</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Global Skills #2 - Project Planning e Organização de Sprints</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">2,1 mil visualizações • Transmitido há 2 dias</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 5 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-05.png" alt="Como aprender a programar Python do ZERO">
+            <span class="duration-tag">38:15</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Como aprender a programar Python do ZERO | Guia Completo para Iniciantes</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">711 visualizações • há 6 dias</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 6 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-01.png" alt="Introdução ao CSS Grid Layout">
+            <span class="duration-tag">1:12:00</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Introdução ao CSS Grid Layout: Criando Interfaces Modernas e Responsivas</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">3,4 mil visualizações • há 1 semana</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 7 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-02.png" alt="Carreira Tech 2026">
+            <span class="duration-tag">54:19</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Carreira Tech: As habilidades mais procuradas pelo mercado de tecnologia</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">4,8 mil visualizações • há 2 semanas</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 8 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-03.png" alt="Construindo APIs RESTful escaláveis">
+            <span class="duration-tag">1:45:10</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Construindo APIs RESTful escaláveis com Node.js, Express e TypeScript</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">5,2 mil visualizações • há 3 semanas</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 9 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-04.png" alt="Git e GitHub para Iniciantes">
+            <span class="duration-tag">32:40</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Git e GitHub para Iniciantes: Do commit inicial ao pull request</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">8,9 mil visualizações • há 1 mês</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 10 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-05.png" alt="Clean Code e Arquitetura Limpa">
+            <span class="duration-tag">1:05:22</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Princípios de Clean Code: Como escrever código legível e sustentável</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">6,1 mil visualizações • há 1 mês</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 11 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-01.png" alt="Flexbox vs Grid">
+            <span class="duration-tag">49:15</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Flexbox vs CSS Grid: Quando usar cada um no desenvolvimento web moderno</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">7,5 mil visualizações • há 1 mês</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vídeo 12 -->
+        <article class="video-card">
+          <div class="thumbnail-box">
+            <img src="assets/img/thumbnails/thumbnail-02.png" alt="Inteligência Artificial com LLMs">
+            <span class="duration-tag">1:35:40</span>
+          </div>
+          <div class="video-meta-box">
+            <div class="author-avatar">
+              <img src="assets/img/dio.png" alt="DIO">
+            </div>
+            <div class="video-info">
+              <h2 class="video-card-title">Inteligência Artificial na Prática: Engenharia de Prompts e Agentes Autônomos</h2>
+              <div class="channel-name-row">
+                <span>DigitalInnovationOne</span>
+                <svg class="verified-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+              </div>
+              <span class="video-stats">9,8 mil visualizações • há 2 meses</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
